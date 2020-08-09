@@ -5,6 +5,8 @@ import "./styles.css";
 import Input from "../../components/Input";
 
 import warningIcon from "../../assets/images/icons/warning.svg";
+import Textarea from "../../components/Textarea";
+import Select from "../../components/Select";
 
 const TeacherForm: React.FC = () => {
   return (
@@ -20,18 +22,27 @@ const TeacherForm: React.FC = () => {
           <Input name="name" label="Nome completo:" />
           <Input name="avatar" label="Avatar:" />
           <Input name="whatsapp" label="Whatsapp:" />
+          <Textarea name="bio" label="Biografia:" />
         </fieldset>
         <fieldset>
           <legend>Sobre a aula:</legend>
-          <Input name="name" label="Nome completo:" />
-          <Input name="avatar" label="Avatar:" />
-          <Input name="whatsapp" label="Whatsapp:" />
+          <Select
+            name="subject"
+            label="Matéria"
+            options={[
+              { value: "OO", label: "Orientação a Objetos" },
+              { value: "Java", label: "Java" },
+              { value: "CSharp", label: "C#" },
+              { value: "Javascript", label: "Javascript" },
+              { value: "DataScience", label: "Data Science" },
+              { value: "Patterns", label: "Design Patterns" },
+            ]}
+          />
+          <Input name="cost" label="Preço hora/aula:" />
         </fieldset>
         <fieldset>
           <legend>Horários disponíveis</legend>
           <Input name="name" label="Nome completo:" />
-          <Input name="avatar" label="Avatar:" />
-          <Input name="whatsapp" label="Whatsapp:" />
         </fieldset>
         <footer>
           <p>
