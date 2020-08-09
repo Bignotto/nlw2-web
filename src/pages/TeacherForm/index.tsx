@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PageHeader from "../../components/PageHeader";
 
 import "./styles.css";
@@ -8,7 +8,32 @@ import warningIcon from "../../assets/images/icons/warning.svg";
 import Textarea from "../../components/Textarea";
 import Select from "../../components/Select";
 
+interface ScheduleItem {
+  week_day: string;
+  from: string;
+  to: string;
+}
+
 const TeacherForm: React.FC = () => {
+  const [shceduleTimes, setScheduleTimes] = useState([
+    {
+      week_day: "",
+      from: "",
+      to: "",
+    },
+  ]);
+
+  function handleAddSchedule() {
+    setScheduleTimes([
+      ...shceduleTimes,
+      {
+        week_day: "",
+        from: "",
+        to: "",
+      },
+    ]);
+  }
+
   return (
     <div id="page-teacher-form" className="container">
       <PageHeader
@@ -41,8 +66,34 @@ const TeacherForm: React.FC = () => {
           <Input name="cost" label="Preço hora/aula:" />
         </fieldset>
         <fieldset>
-          <legend>Horários disponíveis</legend>
-          <Input name="name" label="Nome completo:" />
+          <legend>
+            Horários disponíveis
+            <button type="button" onClick={handleAddSchedule}>
+              + novo horário
+            </button>
+          </legend>
+          {shceduleTimes.map(shceduleItem => {
+            return (
+              <div key={shceduleItem.week_day} className="schedule-item">
+                <Select
+                  defaultValue=""
+                  name="week_day"
+                  label="Dia da semana"
+                  options={[
+                    { value: "0", label: "Domingo" },
+                    { value: "1", label: "Segunda-feira" },
+                    { value: "2", label: "Terça-feira" },
+                    { value: "3", label: "Quarta--feira" },
+                    { value: "4", label: "Quinta-feira" },
+                    { value: "5", label: "Sexta-feira" },
+                    { value: "6", label: "Sábado" },
+                  ]}
+                />
+                <Input name="from" label="Das:" type="time" />
+                <Input name="to" label="Até:" type="time" />
+              </div>
+            );
+          })}
         </fieldset>
         <footer>
           <p>
