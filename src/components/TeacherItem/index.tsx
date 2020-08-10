@@ -2,6 +2,7 @@ import React from "react";
 
 import "./styles.css";
 import zapLogo from "../../assets/images/icons/whatsapp.svg";
+import api from "../../services/api";
 
 export interface Teacher {
   id: number;
@@ -18,6 +19,12 @@ interface TeacherItemProps {
 }
 
 const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
+  function handleCreateConnection() {
+    api.post("connections", {
+      user_id: teacher.id,
+    });
+  }
+
   return (
     <main>
       <article className="teacher-item">
@@ -34,10 +41,14 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
             Investimento/hora
             <strong>R$ {teacher.cost}</strong>
           </p>
-          <button type="button">
+          <a
+            onClick={handleCreateConnection}
+            target="_blank"
+            href={`https://wa.me/${teacher.whatsapp}`}
+          >
             <img src={zapLogo} alt="zapzap" />
             {teacher.whatsapp}
-          </button>
+          </a>
         </footer>
       </article>
     </main>
