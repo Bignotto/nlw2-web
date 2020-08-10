@@ -3,40 +3,40 @@ import React from "react";
 import "./styles.css";
 import zapLogo from "../../assets/images/icons/whatsapp.svg";
 
-const TeacherItem: React.FC = () => {
+export interface Teacher {
+  id: number;
+  avatar: string;
+  bio: string;
+  cost: number;
+  name: string;
+  subject: string;
+  whatsapp: string;
+}
+
+interface TeacherItemProps {
+  teacher: Teacher;
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
   return (
     <main>
       <article className="teacher-item">
         <header>
-          <img
-            src="https://avatars0.githubusercontent.com/u/2911353?s=460&v=4"
-            alt="Big"
-          />
+          <img src={teacher.avatar} alt="teacher photo" />
           <div>
-            <strong>Thiago Bignotto</strong>
-            <span>Química</span>
+            <strong>{teacher.name}</strong>
+            <span>{teacher.subject}</span>
           </div>
         </header>
-        <p>
-          Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-          consectetur, adipisci velit...
-          <br />
-          <br />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vulputate
-          pharetra lacus, eu porttitor eros varius a. Etiam massa ex, volutpat
-          id nisi sit amet, aliquet pharetra leo. Donec bibendum at tellus quis
-          tristique. Nulla facilisi. Nulla faucibus lectus id mollis lacinia.
-          Nam vitae tortor lacinia, tristique lacus sit amet, vulputate est.
-          Nunc sed ante tincidunt, hendrerit eros non, fringilla metus.
-        </p>
+        <p>{teacher.bio}</p>
         <footer>
           <p>
             Investimento/hora
-            <strong>R$ 150,00</strong>
+            <strong>R$ {teacher.cost}</strong>
           </p>
           <button type="button">
             <img src={zapLogo} alt="zapzap" />
-            Entrar em contato
+            {teacher.whatsapp}
           </button>
         </footer>
       </article>
